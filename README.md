@@ -1,7 +1,7 @@
 Bu proje, Iris dataset üzerinde **MLOps pipeline** kurmayı amaçlamaktadır.  
 Veri indirme, veri işleme, görselleştirme, model geliştirme ve optimizasyon adımları hem **Git** hem de **DVC** ile yönetilmektedir.
 
-
+```text
 iris_mlops/
 │   README.md
 │   requirements.txt
