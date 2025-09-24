@@ -33,7 +33,6 @@ iris_mlops/
 
 
 
-
 önce sanal env oluşturma: python -m venv irismlops
 sonra env girme : irismlops\Scripts\activate
 requirement.txt indirme: pip install -r requirement.txt
