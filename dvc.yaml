@@ -1,0 +1,18 @@
+stages:
+  data_downloading:
+    cmd: python src/1_data_indirme.py
+    deps:
+      - src/1_data_indirme.py
+    outs:
+      - data/raw/iris_raw.csv
+
+  fature_engineering:
+    cmd: python src/2_feature_engineering.py
+    deps: 
+      - src/2_feature_engineering.py
+      - data/raw/iris_raw.csv
+    outs:
+      - data/processed/iris_processed.csv
+
+  
+
