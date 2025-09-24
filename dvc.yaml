@@ -38,6 +38,7 @@ stages:
     deps:
       - src/model_optimizasyon.py
       - data/processed/iris_processed.csv
+    outs:
       - models/optimized/best_random_forest.pkl
 
   
