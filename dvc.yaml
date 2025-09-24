@@ -14,5 +14,15 @@ stages:
     outs:
       - data/processed/iris_processed.csv
 
+  gorsellestirme:
+    cmd: python src/3_görselleştirme.py
+    deps:
+      - src/3_görselleştirme.py
+      - data/processed/iris_processed.csv
+    outs:
+      - görseller/hist_plots.png
+      - görseller/pairplot.png
+      - görseller/correlation_heatmap.png
+
   
 
