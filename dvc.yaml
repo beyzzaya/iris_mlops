@@ -33,5 +33,12 @@ stages:
       - models/logistic_regression.pkl
       - models/random_forest.pkl
 
+  model_optimizasyon:
+    cmd: python src/model_optimizasyon.py
+    deps:
+      - src/model_optimizasyon.py
+      - data/processed/iris_processed.csv
+      - models/optimized/best_random_forest.pkl
+
   
 
