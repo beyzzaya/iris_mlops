@@ -24,5 +24,14 @@ stages:
       - görseller/pairplot.png
       - görseller/correlation_heatmap.png
 
+  model:
+    cmd: python src/model_geliştirme.py
+    deps:
+      - src/model_geliştirme.py
+      - data/processed/iris_processed.csv
+    outs:
+      - models/logistic_regression.pkl
+      - models/random_forest.pkl
+
   
 
