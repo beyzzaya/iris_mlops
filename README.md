@@ -23,13 +23,7 @@ iris_mlops/
     ├── model_gelistirme.py
     └── model_optimizasyon.py
 
-
-
-
-
-
-
-
+'''
 
 
 
