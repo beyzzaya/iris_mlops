@@ -105,8 +105,8 @@ def run_full_pipeline():
         ("python src/1_data_indirme.py", "Veri İndirme"),
         ("python src/2_feature_engineering.py", "Özellik Mühendisliği"),
         ("python src/3_görselleştirme.py", "Görselleştirme"),
-        ("python src/model_gelistirme.py", "Model Geliştirme"),
-        ("python src/best_model_optimize.py", "En İyi Model Detaylı Optimizasyonu")
+        ("python src/model_geliştirme.py", "Model Geliştirme"),
+        ("python src/model_optimizasyon.py", "En İyi Model Detaylı Optimizasyonu")
     ]
     
     successful_steps = 0
@@ -172,7 +172,7 @@ def main():
             "features": ("python src/2_feature_engineering.py", "Özellik Mühendisliği"),
             "gorsellestirme": ("python src/3_görselleştirme.py", "Gorsellestirme"),
             "models": ("python src/model_gelistirme.py", "Model Geliştirme"),
-            "optimize": ("python src/best_model_optimize.py", "En İyi Model Detaylı Optimizasyonu")
+            "optimize": ("python src/model_optimizasyon.py", "En İyi Model Detaylı Optimizasyonu")
         }
         
         if args.step in step_commands:

@@ -24,7 +24,7 @@ iris_mlops/
     └── model_optimizasyon.py
 
 
-
+```  
 
 
 
@@ -60,6 +60,9 @@ daha sonra da : git commit -m "dvc güncellendi."
 githuba bağlan : gh auth login
 github repo oluştur : gh repo create iris_mlops --public --source=.
 çalışmayı pushla : git push -u origin main
+
+
+
 
 
 

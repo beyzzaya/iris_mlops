@@ -1,7 +1,7 @@
 import pandas as pd
 import os 
-from sklearn import train_test_split
-from sklearn import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import joblib
