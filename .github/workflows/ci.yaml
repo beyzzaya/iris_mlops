@@ -20,8 +20,20 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          # Gerekli tüm kütüphaneleri ve test araçlarını kur
           pip install -r requirements.txt pytest flake8
 
+      # --- KRİTİK ADIM: MODEL EĞİTİMİ (TESTLER İÇİN GEREKLİ) ---
+      - name: Train and Optimize Model
+        run: |
+          # Model dosyalarının doğru yolda (models/optimized) oluşmasını sağlamak için src içindeki
+          # eğitim ve optimizasyon scriptlerini çalıştır.
+          # Bu, testlerin 'best_random_forest.pkl' dosyasını bulmasını sağlar.
+          python src/1_data_indirme.py # Veri indirme/hazırlık adımı (Eğer gerekiyorsa)
+          python src/model_geliştirme.py
+          python src/model_optimizasyonu.py
+      # ----------------------------------------------------
+          
       - name: Lint
         run: flake8 . --max-line-length=120
 

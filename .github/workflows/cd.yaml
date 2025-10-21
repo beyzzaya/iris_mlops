@@ -2,7 +2,7 @@ name: "🚀 Sürekli Dağıtım (CD)"
 
 on:
   push:
-    tags: ['v*.*.*']   # Semver tag push ile tetiklenir (örn. v1.2.3)
+    tags: ['v*.*.*']    # SemVer tag push (örn. v1.2.3)
   workflow_dispatch:
     inputs:
       tag:
@@ -12,25 +12,53 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  # Öncelikle testlerin geçtiğinden emin ol (Gerekli değil ama önerilir)
+  check_tests:
+    uses: ./.github/workflows/ci.yaml
+    secrets: inherit
+
   build-and-push:
+    needs: check_tests # Testler geçtikten sonra başla
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Log in to GHCR
+      # --- KRİTİK ADIM: MODEL EĞİTİMİ (DOCKER BUILD İÇİN GEREKLİ) ---
+      # Bu adımı tekrar çalıştırmak, Docker Build Context'e modelin dahil edilmesini garanti eder.
+      - name: Set up Python 3.11 for Model Training
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies for Training
+        run: pip install -r requirements.txt
+        
+      - name: Train and Optimize Model for Docker Build
+        run: |
+          python src/1_data_indirme.py
+          python src/model_geliştirme.py
+          python src/model_optimizasyonu.py
+      # ----------------------------------------------------
+      
+      - name: Login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          
+      # [Diğer adımlarınız buraya devam ediyor...]
+      - name: Compute image name (lowercase)
+        id: img
+        run: echo "name=${GITHUB_REPOSITORY@L}" >> "$GITHUB_OUTPUT"
 
-      - name: Extract tag
+      - name: Resolve tag
         id: vars
         run: |
           if [ -n "${{ github.event.inputs.tag }}" ]; then
@@ -47,6 +75,14 @@ jobs:
         with:
           context: .
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
+            ghcr.io/${{ steps.img.outputs.name }}:${{ steps.vars.outputs.tag }}
+            ghcr.io/${{ steps.img.outputs.name }}:sha-${{ github.sha }}
+          labels: |
+            org.opencontainers.image.source=${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.title=${{ github.event.repository.name }}
+            org.opencontainers.image.url=https://github.com/${{ github.repository }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
