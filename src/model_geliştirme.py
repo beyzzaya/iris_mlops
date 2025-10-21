@@ -10,11 +10,11 @@ import joblib
 def main():
     print("------ Model Geliştirme ------")
 
-    if not os.path.exists("data/processed/iris_processed.csv"):
+    if not os.path.exists("data/raw/iris_raw.csv"):
         print("iris dataseti bulunamadı.")
         return 
     
-    df = pd.read_csv("data/processed/iris_processed.csv")
+    df = pd.read_csv("data/raw/iris_raw.csv")
     X = df.drop("target", axis=1)
     y = df["target"]
 
@@ -23,7 +23,7 @@ def main():
     os.makedirs("models", exist_ok=True)
     print("models adlı dosya oluşturuldu.")
 
-    log_reg = LogisticRegression(max_iter=200)
+    log_reg = LogisticRegression(max_iter=200, solver='liblinear')
     log_reg.fit(X_train, y_train)
     y_pred = log_reg.predict(X_test)
     print("Logistic Regression Accuracy:", accuracy_score(y_test, y_pred))

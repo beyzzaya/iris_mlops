@@ -45,17 +45,17 @@ stages:
       size: 2928
     - path: src/model_geliştirme.py
       hash: md5
-      md5: a0cd42fe115d96cd2add045f3505c214
-      size: 1547
+      md5: a9a0f6e9fad66c661d7dee7e5c23b9f0
+      size: 1543
     outs:
     - path: models/logistic_regression.pkl
       hash: md5
-      md5: d2d86f7463f7dda3e579cd03e34fbcfc
-      size: 1407
+      md5: 46e85878f7774b65b6b3f6a2738deb5f
+      size: 1395
     - path: models/random_forest.pkl
       hash: md5
-      md5: 5a179d4ef59389b7a681d1c1227a63b9
-      size: 176337
+      md5: 84ee899d16466915c96b0081a189fc0b
+      size: 168049
   model_optimizasyon:
     cmd: python src/model_optimizasyon.py
     deps:
@@ -65,10 +65,10 @@ stages:
       size: 2928
     - path: src/model_optimizasyon.py
       hash: md5
-      md5: 3dfae7a1da2126ccdfc2b295b9b786e3
-      size: 1337
+      md5: 96ac1c654a5e516d78b58656412a87aa
+      size: 2425
     outs:
     - path: models/optimized/best_random_forest.pkl
       hash: md5
-      md5: 23f4b29a8ef887fe4c22e3e52f79f147
-      size: 120369
+      md5: 978011951fd0d24c52ba739a7ab556a4
+      size: 65633
