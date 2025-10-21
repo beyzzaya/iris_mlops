@@ -1,0 +1,74 @@
+schema: '2.0'
+stages:
+  data_downloading:
+    cmd: python src/1_data_indirme.py
+    deps:
+    - path: src/1_data_indirme.py
+      hash: md5
+      md5: d576a6189aae9110e60b69bca87f849d
+      size: 507
+    outs:
+    - path: data/raw/iris_raw.csv
+      hash: md5
+      md5: 21d441a28bce4417276097df955afc50
+      size: 2928
+  gorsellestirme:
+    cmd: python src/3_görselleştirme.py
+    deps:
+    - path: data/raw/iris_raw.csv
+      hash: md5
+      md5: 21d441a28bce4417276097df955afc50
+      size: 2928
+    - path: src/3_görselleştirme.py
+      hash: md5
+      md5: 119c14721dc192128d8f9c2f89e12018
+      size: 1311
+    outs:
+    - path: görseller/correlation_heatmap.png
+      hash: md5
+      md5: ac4eb3ac6844fa3c4d8d65bbe8f6556d
+      size: 35949
+    - path: görseller/hist_plots.png
+      hash: md5
+      md5: 38d39d3f481db22ab920ce423caaeb5e
+      size: 36347
+    - path: görseller/pairplot.png
+      hash: md5
+      md5: 4bb11cabf74d80e5289c9d57b82a6728
+      size: 220537
+  model:
+    cmd: python src/model_geliştirme.py
+    deps:
+    - path: data/raw/iris_raw.csv
+      hash: md5
+      md5: 21d441a28bce4417276097df955afc50
+      size: 2928
+    - path: src/model_geliştirme.py
+      hash: md5
+      md5: a0cd42fe115d96cd2add045f3505c214
+      size: 1547
+    outs:
+    - path: models/logistic_regression.pkl
+      hash: md5
+      md5: d2d86f7463f7dda3e579cd03e34fbcfc
+      size: 1407
+    - path: models/random_forest.pkl
+      hash: md5
+      md5: 5a179d4ef59389b7a681d1c1227a63b9
+      size: 176337
+  model_optimizasyon:
+    cmd: python src/model_optimizasyon.py
+    deps:
+    - path: data/raw/iris_raw.csv
+      hash: md5
+      md5: 21d441a28bce4417276097df955afc50
+      size: 2928
+    - path: src/model_optimizasyon.py
+      hash: md5
+      md5: 3dfae7a1da2126ccdfc2b295b9b786e3
+      size: 1337
+    outs:
+    - path: models/optimized/best_random_forest.pkl
+      hash: md5
+      md5: 23f4b29a8ef887fe4c22e3e52f79f147
+      size: 120369

@@ -35,12 +35,12 @@ def main():
 
     grid_search.fit(X_train, y_train)
 
-    print("✅ En iyi parametreler:", grid_search.best_params_)
-    print("✅ En iyi skor:", grid_search.best_score_)
+    print(" En iyi parametreler:", grid_search.best_params_)
+    print(" En iyi skor:", grid_search.best_score_)
 
     os.makedirs("models/optimized", exist_ok=True)
     joblib.dump(grid_search.best_estimator_, "models/optimized/best_random_forest.pkl")
-    print("🎯 Optimize edilmiş model kaydedildi!")
+    print(" Optimize edilmiş model kaydedildi!")
 
 if __name__ == "__main__":
     main()

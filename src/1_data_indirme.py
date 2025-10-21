@@ -5,7 +5,7 @@ import os
 def main():
     print("------ 1.Veri İndirme ------")
 
-    os.makedirs("data/raw", exits_ok=True)
+    os.makedirs("data/raw", exist_ok=True)
 
     iris = load_iris(as_frame=True)
     iris = iris.frame

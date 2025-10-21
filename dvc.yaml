@@ -5,20 +5,11 @@ stages:
       - src/1_data_indirme.py
     outs:
       - data/raw/iris_raw.csv
-
-  fature_engineering:
-    cmd: python src/2_feature_engineering.py
-    deps: 
-      - src/2_feature_engineering.py
-      - data/raw/iris_raw.csv
-    outs:
-      - data/processed/iris_processed.csv
-
   gorsellestirme:
     cmd: python src/3_görselleştirme.py
     deps:
       - src/3_görselleştirme.py
-      - data/processed/iris_processed.csv
+      - data/raw/iris_raw.csv
     outs:
       - görseller/hist_plots.png
       - görseller/pairplot.png
@@ -28,7 +19,7 @@ stages:
     cmd: python src/model_geliştirme.py
     deps:
       - src/model_geliştirme.py
-      - data/processed/iris_processed.csv
+      - data/raw/iris_raw.csv
     outs:
       - models/logistic_regression.pkl
       - models/random_forest.pkl
@@ -37,7 +28,7 @@ stages:
     cmd: python src/model_optimizasyon.py
     deps:
       - src/model_optimizasyon.py
-      - data/processed/iris_processed.csv
+      - data/raw/iris_raw.csv
     outs:
       - models/optimized/best_random_forest.pkl
 

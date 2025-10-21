@@ -5,11 +5,11 @@ import os
 
 def main():
     print("------ 3 Görselleştirme ------")
-    if not os.path.exists("data/processed/iris_processed.csv"):
+    if not os.path.exists("data/raw/iris_raw.csv"):
         print("dataseti bulunamadı.")
         return 
     
-    df = pd.read_csv("data/processed/iris_processed.csv")
+    df = pd.read_csv("data/raw/iris_raw.csv")
     print("iris dataseti yüklendi.")
     os.makedirs("görseller", exist_ok=True)
     print("görseller adında dosya oluşturuldu.")

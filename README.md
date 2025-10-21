@@ -23,7 +23,18 @@ iris_mlops/
     ├── model_gelistirme.py
     └── model_optimizasyon.py
 
+<<<<<<< HEAD
 ```  
+=======
+
+```  
+
+
+
+
+
+
+>>>>>>> 5e1b3b30 (dockere ve ci-cd  oluşturuldu)
 
 
 
@@ -53,6 +64,9 @@ daha sonra da : git commit -m "dvc güncellendi."
 githuba bağlan : gh auth login
 github repo oluştur : gh repo create iris_mlops --public --source=.
 çalışmayı pushla : git push -u origin main
+
+
+
 
 
 
