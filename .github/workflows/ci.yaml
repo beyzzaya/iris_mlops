@@ -1,36 +1,35 @@
-name: 🧪 Sürekli Entegrasyon (CI)
+name: "🧪 Sürekli Entegrasyon (CI)"
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_call: {}    # Re-usable workflow olarak çağrılabilsin diye
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          # Gerekli tüm kütüphaneleri ve test araçlarını kur
           pip install -r requirements.txt pytest flake8
 
-      # --- KRİTİK ADIM: MODEL EĞİTİMİ (TESTLER İÇİN GEREKLİ) ---
-      - name: Train and Optimize Model
-        run: |
-          python src/1_data_indirme.py
-          python src/model_geliştirme.py
-          python src/model_optimizasyonu.py
-      # ----------------------------------------------------
-          
+      # Model dosyaları testlerde gerekiyorsa eğit
+      - name: Train and Optimize Model
+        run: |
+          python src/1_data_indirme.py
+          python src/model_gelistirme.py
+          python src/model_optimizasyonu.py
+
       - name: Lint
         run: flake8 . --max-line-length=120
 
