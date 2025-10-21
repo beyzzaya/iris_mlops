@@ -29,7 +29,7 @@ jobs:
       - name: Train and Optimize Model
         run: |
           python src/1_data_indirme.py
-          python src/model_gelistirme.py
+          python src/model_geliştirme.py
           python src/model_optimizasyon.py
 
       - name: Lint (code style)
