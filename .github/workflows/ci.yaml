@@ -1,12 +1,12 @@
-name: "🧪 CI"
+name: 🧪 CI
 
 on:
   push:
-    branches: [ main ]         # istersen "**" yapıp tüm branch'leri dinleyebilirsin
+    branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_call: {}            # CD içinden reuse edebilmek için
-  workflow_dispatch: {}        # elle tetiklemek için (Actions > Run workflow)
+  workflow_call: {} # CD içinden reuse edebilmek için
+  workflow_dispatch: {} # elle tetiklemek için
 
 jobs:
   test:
@@ -14,7 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -24,14 +25,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt pytest flake8
 
-      # Model gerekiyorsa testten önce üret
+      # Model gerekiyorsa testten önce üret (Hata çözümü için kritik)
       - name: Train and Optimize Model
         run: |
           python src/1_data_indirme.py
-          python src/model_gelistirme.py        # ASCII dosya adı kullandığına emin ol
+          python src/model_gelistirme.py
           python src/model_optimizasyonu.py
 
-      - name: Lint
+      - name: Lint (code style)
         run: flake8 . --max-line-length=120
 
       - name: Run tests
