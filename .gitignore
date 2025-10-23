@@ -1,4 +1,6 @@
 data\ 
 irismlops\
 jupyter\
+görseller\
+models\
 -e "/irismlops/Lib/\n**/site-packages/**\n.venv\nvenv\nenv" 
