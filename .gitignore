@@ -4,3 +4,10 @@ jupyter\
 görseller\
 models\
 -e "/irismlops/Lib/\n**/site-packages/**\n.venv\nvenv\nenv" 
+
+# local envs
+irismlops/Scripts/
+**/site-packages/**
+.venv/
+venv/
+env/
